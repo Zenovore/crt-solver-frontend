@@ -21,7 +21,7 @@
     <!-- <div v-if="answer != '' && answer.length != 2 "> -->
     <div v-if="status && answer.length != 0">
       <h2>Setelah Disederhanakan Didapat Persamaan Modulo</h2>
-      <h3 v-for="ans in answer[0]" :key="ans">x ≡ {{ans[1]}} mod {{ans[2]}}</h3>
+      <h2 v-for="ans in answer[0]" :key="ans">x ≡ {{ans[1]}} mod {{ans[2]}}</h2>
       <h2>Didapat m = {{answer[5]}}</h2>
       <h2 v-for="(ans,index) in answer[2]" :key="ans">M {{index+1}} = {{answer[1][index]}}</h2>
       <h2>Dari data tersebut didapat y</h2>
@@ -129,10 +129,11 @@ export default {
 
 <style>
   h2{
-    font-weight: 800;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   .fas{
     color: red;
