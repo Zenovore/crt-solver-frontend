@@ -17,7 +17,23 @@
           <i @click="deleteEquation(number)" class="fas fa-times"></i>
         </h2>
       </div>
-    <h1 :key="answer" v-if="answer">Jawaban x = {{answer}}</h1>
+    <!-- <h1 :key="answer" v-if="answer">Jawaban x = {{answer[1]}}</h1> -->
+    <!-- <div v-if="answer != '' && answer.length != 2 "> -->
+    <div v-if="status && answer.length != 0">
+      <h2>Setelah Disederhanakan Didapat Persamaan Modulo</h2>
+      <h3 v-for="ans in answer[0]" :key="ans">x ≡ {{ans[1]}} mod {{ans[2]}}</h3>
+      <h2>Didapat m = {{answer[5]}}</h2>
+      <h2 v-for="(ans,index) in answer[2]" :key="ans">M {{index}} = {{answer[1][index]}}</h2>
+      <h2>Dari data tersebut didapat y</h2>
+      <h2 v-for="(ans,index) in answer[2]" :key="ans">y {{index}} = {{answer[2][index]}} karena {{answer[1][index]}}*{{answer[2][index]}} ≡ 1 mod {{answer[3][index]}}</h2>
+      <h2>Sehingga didapat solusi unik dari sistem kekongruenan tersebut adalah</h2>
+      <h2>{{test()}}</h2>
+      <h2>x = {{answer[6]}}</h2>
+      <h2>x ≡ {{answer[6] % answer[5]}} mod {{answer[5]}} </h2>
+    </div>
+    <div v-else-if="!status">
+      <h1>Tidak ada Jawaban</h1>
+    </div>
     </form>
 </template>
 
@@ -33,11 +49,22 @@ export default {
       xConstant : '1',
       remainder : '',
       modulo : '',
-      numberArray : [],
-      answer : ''
+      numberArray : [[2,6,11],[3,4,7],[4,1,5]],
+      answer : '',
+      status: true
     }
   },
   methods:{
+    test(){
+      let result = 'x ='
+      for (let i=0; i<this.answer[0].length;i++){
+        result += `${this.answer[4][i]}*${this.answer[1][i]}*${this.answer[2][i]}`
+        if (i+1 != this.answer[0].length){
+          result += ` + `
+        }
+      }
+      return result
+    },
     addEquation(){
       let result = []
       if (this.remainder-0 >= this.modulo-0){
@@ -52,11 +79,12 @@ export default {
         this.remainder = ''
         this.modulo = ''
         this.answer =''
+        this.status = true
       }
     },
     async getAnswer(){
-      console.log(this.numberArray)
       const request = new Request("https://crt-solver-backend.azurewebsites.net/",{
+        // const request = new Request("http://localhost:5000/",{
           method: "POST",
           mode: "cors",
           cache: "default",
@@ -66,17 +94,14 @@ export default {
           // }
       });
       const res = await fetch(request);
-      // const data = await res;
-      res.text().then((text) => {console.log(text); this.answer = text-0});
+      res.text().then((text) => {
+        console.log(text) ; 
+        this.answer = JSON.parse(text);
+        if (this.answer.length == 0){
+          this.status = false
+        }
+      });
       this.numberArray = []
-      if (this.answer == 0){
-        this.answer = "Tidak Ditemukan"
-      }
-      // if (this.answer == ''){
-
-      // }
-      // console.log(this.answer)
-
     },
     checkSame(a,b){
       if (a.length === b.length){
