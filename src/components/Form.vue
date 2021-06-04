@@ -17,9 +17,7 @@
           <i @click="deleteEquation(number)" class="fas fa-times"></i>
         </h2>
       </div>
-      <div>
-        {{answer}}
-      </div>
+    <h1 :key="answer" v-if="answer">Jawaban x = {{answer}}</h1>
     </form>
 </template>
 
@@ -42,17 +40,23 @@ export default {
   methods:{
     addEquation(){
       let result = []
-      result.push(this.xConstant)
-      result.push(this.remainder)
-      result.push(this.modulo)
-      this.numberArray.push(result)
-      this.xConstant = '1'
-      this.remainder = ''
-      this.modulo = ''
+      if (this.remainder >= this.modulo){
+        alert("Persamaan modulo salah")
+      }
+      else {
+        result.push(this.xConstant)
+        result.push(this.remainder)
+        result.push(this.modulo)
+        this.numberArray.push(result)
+        this.xConstant = '1'
+        this.remainder = ''
+        this.modulo = ''
+        this.answer =''
+      }
     },
     async getAnswer(){
       console.log(this.numberArray)
-      const request = new Request("http://localhost:5000/",{
+      const request = new Request("https://crt-solver-backend.azurewebsites.net/",{
           method: "POST",
           mode: "cors",
           cache: "default",
@@ -63,9 +67,14 @@ export default {
       });
       const res = await fetch(request);
       // const data = await res;
-      res.text().then((text) => {console.log(text)});
+      res.text().then((text) => {console.log(text); this.answer = text-0});
       this.numberArray = []
-      
+      if (this.answer == 0){
+        this.answer = "Tidak Ditemukan"
+      }
+      // if (this.answer == ''){
+
+      // }
       // console.log(this.answer)
 
     },
