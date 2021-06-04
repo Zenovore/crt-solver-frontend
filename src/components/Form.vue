@@ -74,7 +74,9 @@ export default {
         result.push(this.xConstant)
         result.push(this.remainder)
         result.push(this.modulo)
-        this.numberArray.push(result)
+        if (!this.containList(result)){
+          this.numberArray.push(result)
+        }
         this.xConstant = '1'
         this.remainder = ''
         this.modulo = ''
@@ -122,6 +124,15 @@ export default {
         }
       }
     },
+    containList(number){
+      for(let i =0;i<this.numberArray.length;i++){
+        if (this.checkSame(this.numberArray[i],number)){
+          alert("Persamaan sudah ada")
+          return true;
+        }
+      }
+      return false
+    }
     
   }
 }
