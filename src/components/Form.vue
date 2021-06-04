@@ -49,7 +49,7 @@ export default {
       xConstant : '1',
       remainder : '',
       modulo : '',
-      numberArray : [[2,6,11],[3,4,7],[4,1,5]],
+      numberArray : [],
       answer : '',
       status: true
     }
