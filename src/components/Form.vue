@@ -40,7 +40,7 @@ export default {
   methods:{
     addEquation(){
       let result = []
-      if (this.remainder >= this.modulo){
+      if (this.remainder-0 >= this.modulo-0){
         alert("Persamaan modulo salah")
       }
       else {
