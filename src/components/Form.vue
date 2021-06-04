@@ -23,9 +23,9 @@
       <h2>Setelah Disederhanakan Didapat Persamaan Modulo</h2>
       <h2 v-for="ans in answer[0]" :key="ans">x ≡ {{ans[1]}} mod {{ans[2]}}</h2>
       <h2>Didapat m = {{answer[5]}}</h2>
-      <h2 v-for="(ans,index) in answer[2]" :key="ans">M {{index+1}} = {{answer[1][index]}}</h2>
+      <h2 v-for="(ans,index) in answer[2]" :key="ans">M{{index+1}} = {{answer[1][index]}}</h2>
       <h2>Dari data tersebut didapat y</h2>
-      <h2 v-for="(ans,index) in answer[2]" :key="ans">y {{index+1}} = {{answer[2][index]}} karena {{answer[1][index]}}*{{answer[2][index]}} ≡ 1 mod {{answer[3][index]}}</h2>
+      <h2 v-for="(ans,index) in answer[2]" :key="ans">y{{index+1}} = {{answer[2][index]}} karena {{answer[1][index]}}*{{answer[2][index]}} ≡ 1 mod {{answer[3][index]}}</h2>
       <h2>Sehingga didapat solusi unik dari sistem kekongruenan tersebut adalah</h2>
       <h2>{{test()}}</h2>
       <h2>x = {{answer[6]}}</h2>
