@@ -5,6 +5,7 @@ Frontend dan backend dideploy dengan menggunakan bantuan Azure dan CI/CD dilakuk
 
 Perhitungan Chinese Remainder theorem akan menggunakan rumus 
 ![](src/assets/Rumus.jpg)
+
 dimana nilai M dan y akan dicari pada backend, namun belum tentu semua persoalan crt memiliki solusi, jika ternyata persamaan yang ada tidak dapat memberikan solusi maka akan ditampilkan pesan "Tidak ada Jawaban"
 
 # How to use
